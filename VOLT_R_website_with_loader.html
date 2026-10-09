@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#090d0c">
+<title>VOLT//R — Electric, Reimagined</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* VOLT//R page loader — same original neon-lime theme */
+#pageLoader{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:22px;background:#090d0c;transition:opacity .55s ease,visibility .55s ease}
+#pageLoader.loader-hidden{opacity:0;visibility:hidden;pointer-events:none}
+.loader-brand{font-family:'Barlow Condensed',sans-serif;font-size:clamp(38px,7vw,64px);font-weight:900;letter-spacing:3px;color:#f3f5ed}
+.loader-brand span{color:#d5ff3f}
+.loader-track{width:min(220px,55vw);height:3px;background:rgba(255,255,255,.13);overflow:hidden}
+.loader-progress{height:100%;width:35%;background:#d5ff3f;box-shadow:0 0 16px rgba(213,255,63,.65);animation:loaderTravel 1.15s ease-in-out infinite}
+.loader-caption{font-family:'DM Sans',sans-serif;font-size:9px;letter-spacing:3px;color:#9aa49e;text-transform:uppercase}
+.loader-dot{display:inline-block;width:6px;height:6px;margin-right:8px;border-radius:50%;background:#d5ff3f;box-shadow:0 0 10px #d5ff3f;animation:loaderPulse .8s ease-in-out infinite alternate}
+@keyframes loaderTravel{0%{transform:translateX(-110%)}100%{transform:translateX(320%)}}
+@keyframes loaderPulse{to{opacity:.25;transform:scale(.7)}}
+@media(prefers-reduced-motion:reduce){#pageLoader,.loader-progress,.loader-dot{animation:none;transition:none}}
+:root{--bg:#090d0c;--panel:#111715;--lime:#d5ff3f;--white:#f3f5ed;--muted:#9aa49e;--line:rgba(255,255,255,.12)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{background:var(--bg);color:var(--white);font-family:'DM Sans',sans-serif;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer}
+::selection{background:var(--lime);color:#111}
+.cursor-glow{position:fixed;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(213,255,63,.07),transparent 68%);pointer-events:none;z-index:0;transform:translate(-50%,-50%)}
+.nav{height:82px;padding:0 7vw;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);position:fixed;top:0;left:0;width:100%;z-index:50;background:rgba(9,13,12,.75);backdrop-filter:blur(18px);transition:.3s}
+.nav.scrolled{height:70px;background:rgba(9,13,12,.94)}
+.logo{font-family:'Barlow Condensed',sans-serif;font-size:29px;font-weight:900;letter-spacing:1.5px}.logo span{color:var(--lime)}
+.nav-links{display:flex;align-items:center;gap:34px;color:#c5ccc6;font-size:12px;text-transform:uppercase;letter-spacing:1.3px}
+.nav-links a{transition:.25s}.nav-links a:hover{color:var(--lime)}
+.nav-cta,.btn{border:0;background:var(--lime);color:#11170b;padding:14px 21px;font-weight:800;font-size:11px;letter-spacing:1.3px;text-transform:uppercase;display:inline-flex;align-items:center;justify-content:center;gap:12px;transition:transform .25s,box-shadow .25s}
+.nav-cta:hover,.btn:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(213,255,63,.2)}
+.menu-btn{display:none;background:none;color:white;border:1px solid var(--line);padding:9px 12px;font-size:20px}
+.hero{min-height:100vh;padding:140px 7vw 65px;position:relative;display:grid;grid-template-columns:.8fr 1.2fr;align-items:center;isolation:isolate;overflow:hidden}
+.hero:before{content:"";position:absolute;inset:0;z-index:-2;background:radial-gradient(ellipse at 72% 45%,rgba(88,111,47,.19),transparent 42%),linear-gradient(115deg,#090d0c 20%,#101713 100%)}
+.hero-grid{position:absolute;inset:0;z-index:-1;opacity:.17;background-image:linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px);background-size:70px 70px;mask-image:linear-gradient(90deg,transparent,#000)}
+.eyebrow{display:flex;align-items:center;gap:12px;color:var(--lime);font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase}.eyebrow:before{content:"";height:1px;width:28px;background:var(--lime)}
+h1,h2,h3,.big-number{font-family:'Barlow Condensed',sans-serif;text-transform:uppercase}
+.hero h1{font-size:clamp(72px,9vw,142px);line-height:.82;letter-spacing:-2px;margin:28px 0 25px;font-weight:900;position:relative;z-index:2}
+.hero h1 .outline{color:transparent;-webkit-text-stroke:1px rgba(243,245,237,.75)}
+.hero h1 .lime{color:var(--lime)}
+.hero-copy{max-width:390px;color:#a8b0aa;font-size:14px;line-height:1.9;margin-bottom:30px}
+.hero-actions{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+.text-link{font-size:11px;letter-spacing:1px;text-transform:uppercase;font-weight:700;display:flex;align-items:center;gap:9px}.text-link span{font-size:18px;color:var(--lime)}
+.hero-note{display:flex;gap:24px;margin-top:55px}.note-item{border-left:1px solid var(--line);padding-left:13px}.note-item strong{display:block;font-family:'Barlow Condensed',sans-serif;font-size:24px}.note-item small{font-size:9px;color:var(--muted);letter-spacing:1.2px;text-transform:uppercase}
+.hero-visual{position:relative;min-width:0;perspective:1000px}
+.bike-wrap{position:relative;transform-style:preserve-3d;transition:transform .18s ease-out;animation:bikeFloat 6s ease-in-out infinite}
+.bike-image{display:block;width:112%;max-width:none;margin-left:-6%;height:auto;aspect-ratio:1.15;object-fit:cover;object-position:center;border-radius:2px;filter:contrast(1.08) saturate(.85);mix-blend-mode:screen;mask-image:linear-gradient(90deg,transparent 0%,#000 13%,#000 85%,transparent 100%);transform:rotateY(-8deg) rotateX(2deg);box-shadow:0 35px 100px rgba(0,0,0,.4)}
+.image-label{position:absolute;right:3%;top:9%;border:1px solid rgba(213,255,63,.5);padding:12px 15px;background:rgba(9,13,12,.55);backdrop-filter:blur(8px);font-size:9px;letter-spacing:2px;color:var(--lime);transform:translateZ(45px)}
+.orbit{position:absolute;border:1px solid rgba(213,255,63,.15);width:76%;aspect-ratio:1;border-radius:50%;top:10%;left:12%;z-index:-1;transform:rotateX(65deg) rotateZ(-20deg)}
+.orbit:after{content:"";position:absolute;width:8px;height:8px;background:var(--lime);border-radius:50%;top:13%;left:14%;box-shadow:0 0 22px var(--lime)}
+.hero-vertical{position:absolute;right:2.2%;bottom:19%;writing-mode:vertical-rl;letter-spacing:3px;font-size:9px;color:#69746c}
+.scroll-cue{position:absolute;bottom:25px;left:7vw;display:flex;align-items:center;gap:12px;color:#748078;font-size:9px;letter-spacing:2px;text-transform:uppercase}.scroll-cue i{height:36px;width:1px;background:var(--lime);display:block}
+.marquee{overflow:hidden;background:var(--lime);color:#10150a;padding:15px 0;transform:rotate(-1deg) scale(1.02);position:relative;z-index:2}.marquee-track{display:flex;width:max-content;animation:marquee 24s linear infinite}.marquee span{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:900;letter-spacing:2px;margin:0 25px;white-space:nowrap}.marquee b{font-size:15px}
+.section{padding:115px 7vw;position:relative}.section-head{display:flex;justify-content:space-between;align-items:end;gap:35px;margin-bottom:52px}.section h2{font-size:clamp(48px,6vw,83px);line-height:.9;letter-spacing:-1px}.section h2 em{font-style:normal;color:var(--lime)}.section-intro{max-width:340px;color:var(--muted);font-size:13px;line-height:1.8}
+.specs{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.spec{padding:27px 22px 30px;border-right:1px solid var(--line);position:relative;overflow:hidden}.spec:first-child{padding-left:0}.spec:last-child{border:0}.spec small{color:var(--muted);font-size:9px;letter-spacing:2px;text-transform:uppercase}.spec strong{display:block;font-family:'Barlow Condensed',sans-serif;font-size:clamp(36px,4vw,57px);margin:12px 0 4px}.spec strong span{font-size:17px;color:var(--lime)}.spec p{font-size:11px;color:#78837b}
+.models{background:#0e1311}.model-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.model-card{background:#151b18;border:1px solid rgba(255,255,255,.07);position:relative;overflow:hidden;min-width:0;transition:transform .35s,border-color .35s}
+.model-card:hover{transform:translateY(-8px);border-color:rgba(213,255,63,.55)}
+.model-photo{height:250px;position:relative;overflow:hidden;background:#202720}
+.model-photo img{width:100%;height:100%;object-fit:cover;transition:transform .7s;filter:brightness(.8) saturate(.8)}
+.model-card:hover .model-photo img{transform:scale(1.07)}
+.model-tag{position:absolute;top:15px;left:15px;background:var(--lime);color:#10150a;font-size:9px;font-weight:800;letter-spacing:1.5px;padding:7px 10px}
+.model-content{padding:23px}.model-top{display:flex;align-items:start;justify-content:space-between;gap:12px}.model-content h3{font-size:32px;line-height:1}.model-price{font-size:13px;font-weight:700;color:var(--lime);white-space:nowrap}.model-content p{color:var(--muted);font-size:12px;line-height:1.7;margin:13px 0 21px}.model-bottom{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding-top:16px}.model-bottom span{font-size:9px;letter-spacing:1px;color:#aab3ac;text-transform:uppercase}.arrow-btn{width:35px;height:35px;display:grid;place-items:center;background:#252e27;color:var(--lime);border:0;font-size:19px;transition:.2s}.arrow-btn:hover{background:var(--lime);color:#111}
+.feature-layout{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}.feature-image{position:relative;min-height:500px;overflow:hidden;background:#171e19}.feature-image img{width:100%;height:100%;min-height:500px;object-fit:cover;filter:brightness(.8) saturate(.7)}.feature-image:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(8,12,10,.5),transparent 55%)}
+.image-stamp{position:absolute;z-index:2;left:22px;bottom:22px;border:1px solid rgba(213,255,63,.65);padding:16px 18px;background:rgba(9,13,12,.7);backdrop-filter:blur(10px);font-family:'Barlow Condensed',sans-serif;font-size:22px;letter-spacing:1px}
+.feature-copy h2{margin:24px 0}.feature-copy>p{color:var(--muted);font-size:13px;line-height:1.9;max-width:430px}
+.feature-list{margin-top:32px;border-top:1px solid var(--line)}.feature-row{display:flex;align-items:center;gap:18px;padding:19px 0;border-bottom:1px solid var(--line)}.feature-icon{width:40px;height:40px;border:1px solid rgba(213,255,63,.25);display:grid;place-items:center;color:var(--lime);font-size:19px;flex-shrink:0}.feature-row strong{display:block;font-size:12px;margin-bottom:5px}.feature-row small{color:var(--muted);font-size:11px}
+.experience{padding:0 7vw 110px}.experience-panel{position:relative;overflow:hidden;min-height:430px;display:flex;align-items:center;padding:65px 7%;background:#161d17}.experience-panel>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.35;filter:grayscale(.2)}.experience-panel:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#0a0f0c 0%,rgba(10,15,12,.8) 40%,rgba(10,15,12,.1) 100%)}.experience-content{position:relative;z-index:1;max-width:540px}.experience-content h2{font-size:clamp(52px,7vw,90px);line-height:.9;margin:22px 0}.experience-content p{font-size:13px;line-height:1.8;color:#c1c9c1;max-width:390px;margin-bottom:25px}
+.footer{padding:55px 7vw 25px;border-top:1px solid var(--line);background:#070a09}.footer-top{display:flex;justify-content:space-between;align-items:start;gap:35px;padding-bottom:45px}.footer-brand p{color:var(--muted);font-size:12px;line-height:1.8;max-width:260px;margin-top:15px}.footer-links{display:flex;gap:55px}.footer-col strong{display:block;color:var(--lime);font-size:9px;letter-spacing:2px;margin-bottom:17px}.footer-col a{display:block;color:#a6afa8;font-size:11px;margin:12px 0}.footer-col a:hover{color:var(--white)}.footer-bottom{border-top:1px solid var(--line);padding-top:20px;display:flex;justify-content:space-between;gap:15px;color:#647067;font-size:9px;letter-spacing:1px;text-transform:uppercase}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .75s ease,transform .75s ease}.reveal.visible{opacity:1;transform:translateY(0)}
+.toast{position:fixed;bottom:24px;right:24px;z-index:100;background:var(--lime);color:#10150a;padding:16px 20px;font-size:12px;font-weight:700;box-shadow:0 12px 40px #0008;transform:translateY(140%);transition:transform .4s}.toast.show{transform:translateY(0)}
+@keyframes bikeFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes marquee{to{transform:translateX(-50%)}}
+
+.theme-toggle{border:1px solid var(--line);background:transparent;color:var(--white);padding:11px 13px;font-size:9px;letter-spacing:1px;font-weight:700;display:flex;align-items:center;gap:8px;white-space:nowrap;transition:.25s}.theme-toggle:hover{border-color:var(--lime);color:var(--lime)}.theme-toggle:first-letter{font-size:15px}
+body.light-mode{--bg:#f0f3e9;--panel:#fff;--white:#131a13;--muted:#626e62;--line:rgba(20,35,20,.15);background:var(--bg);color:var(--white)}
+body.light-mode .nav{background:rgba(240,243,233,.82)}body.light-mode .nav.scrolled{background:rgba(240,243,233,.96)}body.light-mode .nav-links{color:#364036}body.light-mode .hero:before{background:radial-gradient(ellipse at 72% 45%,rgba(163,194,70,.22),transparent 42%),linear-gradient(115deg,#f0f3e9 20%,#e1e9d9 100%)}body.light-mode .hero-grid{opacity:.3;background-image:linear-gradient(rgba(10,30,10,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(10,30,10,.08) 1px,transparent 1px)}body.light-mode .hero-copy{color:#4d5a4d}body.light-mode .hero h1 .outline{-webkit-text-stroke-color:rgba(19,26,19,.7)}body.light-mode .models{background:#e6ebdf}body.light-mode .model-card{background:#f8faf4;border-color:rgba(20,35,20,.12)}body.light-mode .model-content p,body.light-mode .model-bottom span{color:#596559}body.light-mode .model-bottom{border-color:var(--line)}body.light-mode .arrow-btn{background:#dfe6d7}body.light-mode .feature-image{background:#dce5d6}body.light-mode .feature-image:after{background:linear-gradient(0deg,rgba(8,12,10,.45),transparent 55%)}body.light-mode .experience-panel{background:#dce5d6}body.light-mode .experience-content p{color:#e6ece5}body.light-mode .footer{background:#e3e9dc}body.light-mode .footer-brand p,body.light-mode .footer-col a,body.light-mode .footer-bottom{color:#586458}body.light-mode .footer-col strong{color:#557000}body.light-mode .contact-info{background:#dfe8d5}body.light-mode .contact-info>p{color:#586458}body.light-mode .contact-detail strong,body.light-mode .contact-detail a{color:#202a20}body.light-mode .contact-form{background:#f9fbf6}body.light-mode .contact-form input,body.light-mode .contact-form select,body.light-mode .contact-form textarea{background:#edf1e7;color:#151c15;border-color:rgba(20,35,20,.18)}body.light-mode .form-status{color:#526052}
+.slider-section{background:var(--bg)}.bike-slider{position:relative}.slider-track{height:clamp(350px,56vw,610px);position:relative;overflow:hidden;background:#151a16}.slide{position:absolute;inset:0;opacity:0;transform:scale(1.04);transition:opacity .65s ease,transform 1.1s ease;pointer-events:none}.slide.active{opacity:1;transform:scale(1);pointer-events:auto}.slide img{width:100%;height:100%;object-fit:cover;filter:brightness(.75) saturate(.78)}.slide-shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,9,7,.85),transparent 80%),linear-gradient(0deg,rgba(5,9,7,.6),transparent 60%)}.slide-caption{position:absolute;left:7%;bottom:12%;}.slide-caption span{font-size:10px;letter-spacing:2.5px;color:var(--lime);font-weight:700}.slide-caption h3{font-size:clamp(46px,8vw,100px);line-height:.85;margin-top:20px;letter-spacing:-1px}.slider-controls{display:flex;align-items:center;gap:25px;padding:20px 0;border-bottom:1px solid var(--line)}.slider-count{display:flex;align-items:center;gap:13px;font-size:10px;color:var(--muted);letter-spacing:1px}.slider-count span:first-child{font-size:20px;color:var(--lime);font-family:'Barlow Condensed',sans-serif}.slider-count i{width:40px;height:1px;background:var(--line)}.slider-buttons{display:flex;gap:8px}.slider-buttons button{width:42px;height:42px;border:1px solid var(--line);background:transparent;color:var(--white);font-size:20px;transition:.2s}.slider-buttons button:hover{background:var(--lime);color:#10150a;border-color:var(--lime)}.slider-dots{display:flex;gap:7px;margin-left:auto}.slider-dots button{width:7px;height:7px;border:0;border-radius:50%;background:#687169;padding:0}.slider-dots button.active{background:var(--lime);width:25px;border-radius:8px}
+.contact-section{background:#0d120f}.contact-layout{display:grid;grid-template-columns:.8fr 1.2fr;gap:18px}.contact-info{position:relative;overflow:hidden;background:#151d17;padding:clamp(28px,4vw,55px);min-height:530px}.contact-info h3{font-size:clamp(42px,5vw,66px);line-height:.9;margin:24px 0}.contact-info h3 em{font-style:normal;color:var(--lime)}.contact-info>p{color:var(--muted);font-size:12px;line-height:1.9;max-width:300px;margin-bottom:28px}.contact-orbit{position:absolute;right:-28px;top:32px;border:1px solid rgba(213,255,63,.15);border-radius:50%;width:150px;height:150px;display:grid;place-items:center;font-family:'Barlow Condensed',sans-serif;font-size:32px;color:rgba(213,255,63,.25);transform:rotate(-20deg)}.contact-detail{display:flex;align-items:center;gap:14px;margin:19px 0}.contact-detail>span{width:38px;height:38px;display:grid;place-items:center;border:1px solid rgba(213,255,63,.25);color:var(--lime)}.contact-detail small{display:block;color:var(--muted);font-size:8px;letter-spacing:1.5px;margin-bottom:5px}.contact-detail a,.contact-detail strong{font-size:11px;font-weight:600}.contact-social{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;position:absolute;bottom:28px;left:clamp(28px,4vw,55px);right:clamp(28px,4vw,55px);font-size:8px;letter-spacing:1px;color:var(--muted)}.contact-social a{color:var(--lime)}.contact-form{background:#141a16;padding:clamp(25px,4vw,50px);display:flex;flex-direction:column;gap:23px}.form-heading{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-bottom:20px;border-bottom:1px solid var(--line);font-size:9px;letter-spacing:1.5px;color:var(--muted)}.form-status{color:#a9c96b;font-size:8px}.form-status i{display:inline-block;width:6px;height:6px;background:var(--lime);border-radius:50%;margin-right:7px;box-shadow:0 0 8px var(--lime)}.form-row{display:grid;grid-template-columns:1fr 1fr;gap:15px}.contact-form label{display:flex;flex-direction:column;gap:10px;font-size:9px;letter-spacing:1.4px;font-weight:700;color:var(--muted)}.contact-form input,.contact-form select,.contact-form textarea{width:100%;border:1px solid rgba(255,255,255,.13);background:#0c110e;color:var(--white);padding:15px 14px;font:12px 'DM Sans',sans-serif;outline:none;transition:border-color .2s;border-radius:0;letter-spacing:0}.contact-form input:focus,.contact-form select:focus,.contact-form textarea:focus{border-color:var(--lime)}.contact-form input::placeholder,.contact-form textarea::placeholder{color:#68736a}.contact-form textarea{resize:vertical;min-height:115px}.form-submit-row{display:flex;align-items:center;gap:17px;flex-wrap:wrap}.form-submit-row small{font-size:9px;color:var(--muted)}.form-feedback{font-size:12px;color:var(--lime);min-height:15px}
+@media(max-width:900px){.theme-toggle{margin-left:auto;margin-right:12px}.contact-layout{grid-template-columns:1fr}.contact-info{min-height:480px}}
+@media(max-width:680px){.theme-toggle{padding:9px;font-size:0;margin-right:10px}.theme-toggle span{display:none}.theme-toggle{font-size:16px}.slider-track{height:420px}.slide-caption{left:6%;bottom:10%}.slider-controls{gap:13px}.slider-buttons button{width:37px;height:37px}.form-row{grid-template-columns:1fr}.contact-info{min-height:490px}.contact-form{gap:20px}.contact-social{bottom:22px}}
+
+@media(max-width:900px){.nav{padding:0 5vw}.hero{padding-left:5vw;padding-right:5vw;grid-template-columns:1fr;min-height:auto;padding-top:145px}.hero-copy{max-width:520px}.hero-visual{margin-top:20px}.bike-image{width:100%;margin:0}.hero-vertical{right:0}.scroll-cue{left:5vw}.section{padding:85px 5vw}.feature-layout{gap:35px}.model-photo{height:210px}.experience{padding:0 5vw 85px}}
+@media(max-width:680px){.nav{height:70px}.nav-links{display:none;position:absolute;top:70px;left:0;right:0;padding:24px 6vw 30px;background:rgba(9,13,12,.98);flex-direction:column;align-items:flex-start;gap:22px;border-bottom:1px solid var(--line)}.nav-links.open{display:flex}.nav-cta{display:none}.menu-btn{display:block}.hero{padding-top:120px;padding-bottom:65px}.hero h1{font-size:clamp(68px,18vw,105px)}.hero-note{gap:14px;margin-top:35px}.note-item{padding-left:9px}.note-item strong{font-size:21px}.note-item small{font-size:8px}.image-label{right:1%;top:3%;font-size:8px}.section{padding:72px 6vw}.section-head{display:block;margin-bottom:35px}.section-intro{margin-top:20px}.specs{grid-template-columns:1fr 1fr}.spec{padding:20px 12px;border-bottom:1px solid var(--line)}.spec:first-child{padding-left:12px}.spec:nth-child(2){border-right:0}.spec:nth-child(3),.spec:nth-child(4){border-bottom:0}.spec strong{font-size:43px}.model-grid{grid-template-columns:1fr;gap:18px}.model-photo{height:260px}.feature-layout{grid-template-columns:1fr;gap:35px}.feature-image,.feature-image img{min-height:340px}.feature-copy h2{font-size:60px}.experience{padding:0 6vw 72px}.experience-panel{padding:45px 7%;min-height:420px}.experience-panel:after{background:linear-gradient(90deg,rgba(10,15,12,.95),rgba(10,15,12,.5))}.footer{padding:40px 6vw 22px}.footer-top{flex-direction:column}.footer-links{gap:35px;flex-wrap:wrap}.footer-bottom{flex-direction:column}.marquee span{font-size:17px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<div id="pageLoader" role="status" aria-label="Loading VOLT R website">
+  <div class="loader-brand">VOLT<span>//</span>R</div>
+  <div class="loader-track"><div class="loader-progress"></div></div>
+  <div class="loader-caption"><i class="loader-dot"></i>Charging your experience</div>
+</div>
+<div class="cursor-glow" id="glow"></div>
+<header class="nav" id="navbar">
+  <a href="#home" class="logo" aria-label="VOLT R home">VOLT<span>//</span>R</a>
+  <nav class="nav-links" id="navLinks"><a href="#technology">Technology</a><a href="#showcase">Showcase</a><a href="#models">The lineup</a><a href="#engineering">Engineering</a><a href="#experience">Our mission</a><a href="#contact">Contact</a></nav>
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle light and dark mode" title="Toggle theme">☼ <span>LIGHT MODE</span></button>
+  <a class="nav-cta" href="#models">Explore bikes <span>↗</span></a>
+  <button class="menu-btn" id="menuBtn" aria-label="Open navigation" aria-expanded="false">☰</button>
+</header>
+<main>
+<section class="hero" id="home">
+  <div class="hero-grid"></div>
+  <div class="hero-copy-wrap reveal">
+    <div class="eyebrow">The next charge starts here</div>
+    <h1>Ride<br><span class="outline">beyond</span><br><span class="lime">limits.</span></h1>
+    <p class="hero-copy">Meet the new generation of electric motorcycles. Precision engineered, unapologetically bold, and built to make every ride feel like the first.</p>
+    <div class="hero-actions"><a href="#models" class="btn">Discover the lineup <span>↗</span></a><a href="#technology" class="text-link"><span>▷</span> Explore the tech</a></div>
+    <div class="hero-note"><div class="note-item"><strong>200 <span style="color:var(--lime)">KM</span></strong><small>Range potential</small></div><div class="note-item"><strong>3.2 <span style="color:var(--lime)">SEC</span></strong><small>0–60 acceleration</small></div><div class="note-item"><strong>0 <span style="color:var(--lime)">EMISSIONS</span></strong><small>At the tailpipe</small></div></div>
+  </div>
+  <div class="hero-visual reveal" id="heroVisual">
+    <div class="orbit"></div>
+    <div class="bike-wrap" id="bikeWrap"><img class="bike-image" src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=1400&q=90" alt="Motorcycle on a dramatic outdoor road" fetchpriority="high"></div>
+    <div class="image-label">01 / ELECTRIC DNA</div>
+    <div class="hero-vertical">DESIGNED FOR THE UNEXPECTED — VOLT//R</div>
+  </div>
+  <div class="scroll-cue"><i></i> Scroll to feel the difference</div>
+</section>
+<div class="marquee" aria-label="VOLT R features"><div class="marquee-track"><span>BUILT FOR THE BOLD <b>✳</b></span><span>ZERO COMPROMISE <b>✳</b></span><span>ALL ELECTRIC. ALL ATTITUDE. <b>✳</b></span><span>BUILT FOR THE BOLD <b>✳</b></span><span>ZERO COMPROMISE <b>✳</b></span><span>ALL ELECTRIC. ALL ATTITUDE. <b>✳</b></span></div></div>
+<section class="section" id="technology">
+  <div class="section-head reveal"><div><div class="eyebrow">Numbers with purpose</div><h2>Power meets<br><em>possibility.</em></h2></div><p class="section-intro">Instant torque. Thoughtful range. Smart technology. Every detail is designed around the feeling of being completely connected to the road.</p></div>
+  <div class="specs reveal"><div class="spec"><small>Maximum range*</small><strong>200<span> km</span></strong><p>Go further, with confidence</p></div><div class="spec"><small>0–60 km/h*</small><strong>3.2<span> sec</span></strong><p>Instant electric response</p></div><div class="spec"><small>Peak output*</small><strong>8.5<span> kW</span></strong><p>Power when you need it</p></div><div class="spec"><small>Charge to 80%*</small><strong>45<span> min</span></strong><p>Less waiting. More riding.</p></div></div>
+  <p style="font-size:9px;color:#657168;margin-top:13px">*Illustrative concept specifications for this design demo. Actual performance depends on model, conditions and configuration.</p>
+</section>
+
+<section class="section slider-section" id="showcase">
+  <div class="section-head reveal"><div><div class="eyebrow">The machine in motion</div><h2>Every angle.<br><em>More attitude.</em></h2></div><p class="section-intro">Swipe through the details, discover the silhouette, and imagine your next ride. A visual showcase inspired by the electric future.</p></div>
+  <div class="bike-slider reveal" id="bikeSlider">
+    <div class="slider-track" id="sliderTrack">
+      <article class="slide active"><img src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=1600&q=90" alt="Sport motorcycle on a dramatic road" loading="lazy"><div class="slide-shade"></div><div class="slide-caption"><span>01 / THE STREET ICON</span><h3>OWN THE<br>ORDINARY.</h3></div></article>
+      <article class="slide"><img src="https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?auto=format&fit=crop&w=1600&q=90" alt="Close-up motorcycle design detail" loading="lazy"><div class="slide-shade"></div><div class="slide-caption"><span>02 / PRECISION IN EVERY LINE</span><h3>FORM FOLLOWS<br>FEELING.</h3></div></article>
+      <article class="slide"><img src="https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&w=1600&q=90" alt="Motorcycle ready for an open road" loading="lazy"><div class="slide-shade"></div><div class="slide-caption"><span>03 / THE LONG WAY HOME</span><h3>TAKE THE<br>SCENIC ROUTE.</h3></div></article>
+    </div>
+    <div class="slider-controls"><div class="slider-count"><span id="slideCurrent">01</span><i></i><span>03</span></div><div class="slider-buttons"><button id="slidePrev" aria-label="Previous slide">←</button><button id="slideNext" aria-label="Next slide">→</button></div><div class="slider-dots" id="sliderDots"><button class="active" aria-label="Go to slide 1"></button><button aria-label="Go to slide 2"></button><button aria-label="Go to slide 3"></button></div></div>
+  </div>
+</section>
+
+<section class="section models" id="models">
+  <div class="section-head reveal"><div><div class="eyebrow">Find your voltage</div><h2>Choose your<br><em>kind of wild.</em></h2></div><p class="section-intro">Three personalities. One electric mindset. Find the ride that fits your world, then make it your own.</p></div>
+  <div class="model-grid">
+    <article class="model-card reveal"><div class="model-photo"><img src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=900&q=85" alt="Sport motorcycle outdoors" loading="lazy"><span class="model-tag">01 / STREET</span></div><div class="model-content"><div class="model-top"><h3>VOLT R / ONE</h3><span class="model-price">Concept</span></div><p>Agile by nature. Sharp by design. Your daily ride, redefined with a confident urban stance.</p><div class="model-bottom"><span>City / Everyday</span><button class="arrow-btn explore-btn" data-model="VOLT R / ONE" aria-label="Explore Volt R One">↗</button></div></div></article>
+    <article class="model-card reveal"><div class="model-photo"><img src="https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?auto=format&fit=crop&w=900&q=85" alt="Motorcycle detail in a studio" loading="lazy"><span class="model-tag">02 / PERFORMANCE</span></div><div class="model-content"><div class="model-top"><h3>VOLT R / X</h3><span class="model-price">Concept</span></div><p>Precision, attitude, and a low center of gravity for riders who want every corner to count.</p><div class="model-bottom"><span>Performance / Sport</span><button class="arrow-btn explore-btn" data-model="VOLT R / X" aria-label="Explore Volt R X">↗</button></div></div></article>
+    <article class="model-card reveal"><div class="model-photo"><img src="https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&w=900&q=85" alt="Motorcycle ready for a long road ride" loading="lazy"><span class="model-tag">03 / ADVENTURE</span></div><div class="model-content"><div class="model-top"><h3>VOLT R / TERRA</h3><span class="model-price">Concept</span></div><p>Leave the usual route behind. Rugged inspiration for open roads and unplanned detours.</p><div class="model-bottom"><span>Touring / Adventure</span><button class="arrow-btn explore-btn" data-model="VOLT R / TERRA" aria-label="Explore Volt R Terra">↗</button></div></div></article>
+  </div>
+</section>
+<section class="section" id="engineering">
+  <div class="feature-layout">
+    <div class="feature-image reveal"><img src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=1200&q=85" alt="Motorcycle and road, representing considered engineering" loading="lazy"><div class="image-stamp">LESS NOISE. MORE FEELING.</div></div>
+    <div class="feature-copy reveal"><div class="eyebrow">Engineered around you</div><h2>Smart tech.<br><em>Pure feeling.</em></h2><p>Electric riding should feel effortless. Our concept puts the essentials at your fingertips, wrapping thoughtful technology in a clean, rider-first experience.</p>
+      <div class="feature-list"><div class="feature-row"><div class="feature-icon">ϟ</div><div><strong>Instant electric torque</strong><small>Responsive power delivery for smooth, confident acceleration.</small></div></div><div class="feature-row"><div class="feature-icon">◉</div><div><strong>Connected cockpit</strong><small>A clear, minimal interface keeps your ride in focus.</small></div></div><div class="feature-row"><div class="feature-icon">⌁</div><div><strong>Regenerative braking</strong><small>Designed to recover energy as you slow down.</small></div></div><div class="feature-row"><div class="feature-icon">⌖</div><div><strong>Made for real life</strong><small>Useful everyday design meets a distinctive road presence.</small></div></div></div>
+    </div>
+  </div>
+</section>
+<section class="experience" id="experience"><div class="experience-panel reveal"><img src="https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=1800&q=85" alt="" loading="lazy"><div class="experience-content"><div class="eyebrow">The road is calling</div><h2>Tomorrow<br>is <em style="color:var(--lime)">not waiting.</em></h2><p>Discover a different way to move. Cleaner, quieter, and full of possibility. Your next chapter starts with one ride.</p><a class="btn" href="#models">Find your ride <span>↗</span></a></div></div></section>
+
+<section class="section contact-section" id="contact">
+  <div class="section-head reveal"><div><div class="eyebrow">Your next ride starts here</div><h2>Let's talk<br><em>electric.</em></h2></div><p class="section-intro">Have a question, a collaboration idea, or want to know more about the VOLT//R concept? Send a message.</p></div>
+  <div class="contact-layout">
+    <aside class="contact-info reveal"><span class="contact-orbit">V//R</span><div class="eyebrow">Get in touch</div><h3>GOOD RIDES<br>START WITH<br><em>A HELLO.</em></h3><p>We’re building a more exciting electric future. Drop us a note and let’s start a conversation.</p><div class="contact-detail"><span>✉</span><div><small>EMAIL</small><a href="mailto:hello@voltr.example">hello@voltr.example</a></div></div><div class="contact-detail"><span>⌖</span><div><small>CONCEPT STUDIO</small><strong>Built for the open road</strong></div></div><div class="contact-social"><a href="#home">BACK TO TOP ↑</a><span>VOLT//R · ELECTRIC, REIMAGINED</span></div></aside>
+    <form class="contact-form reveal" id="contactForm">
+      <div class="form-heading"><span>01 — SAY HELLO</span><span class="form-status"><i></i> OPEN FOR MESSAGES</span></div>
+      <div class="form-row"><label>YOUR NAME<input name="name" type="text" placeholder="How should we call you?" required minlength="2"></label><label>EMAIL ADDRESS<input name="email" type="email" placeholder="you@example.com" required></label></div>
+      <label>WHAT'S THIS ABOUT?<select name="subject" required><option value="" disabled selected>Choose a topic</option><option>Bike enquiry</option><option>Partnership / collaboration</option><option>Website feedback</option><option>Something else</option></select></label>
+      <label>YOUR MESSAGE<textarea name="message" rows="4" placeholder="Tell us what's on your mind..." required minlength="10"></textarea></label>
+      <div class="form-submit-row"><button class="btn" type="submit">Send your message <span>↗</span></button><small>Concept demo · no data is sent to a server.</small></div>
+      <p class="form-feedback" id="formFeedback" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+
+</main>
+<footer class="footer"><div class="footer-top"><div class="footer-brand"><a href="#home" class="logo">VOLT<span>//</span>R</a><p>Electric motorcycles for a world that refuses to stand still. Designed as a concept for the next ride.</p></div><div class="footer-links"><div class="footer-col"><strong>EXPLORE</strong><a href="#technology">Technology</a><a href="#showcase">Showcase</a><a href="#models">The lineup</a><a href="#engineering">Engineering</a></div><div class="footer-col"><strong>FOLLOW THE CHARGE</strong><a href="#experience">Our mission</a><a href="#contact">Contact</a><a href="#home">Back to top ↑</a><a href="mailto:hello@voltr.example">Get in touch</a></div></div></div><div class="footer-bottom"><span>© 2026 VOLT//R — Concept website</span><span>Ride responsibly. Think electric.</span></div></footer>
+<div class="toast" id="toast" role="status" aria-live="polite">VOLT//R — coming in hot. This is a concept demo.</div>
+<script>
+// Hide the loader once the page assets are ready (with a safe fallback).
+const pageLoader=document.getElementById('pageLoader');
+function hidePageLoader(){if(pageLoader)pageLoader.classList.add('loader-hidden');}
+window.addEventListener('load',hidePageLoader,{once:true});
+setTimeout(hidePageLoader,3500);
+
+const navbar=document.getElementById('navbar');
+const navLinks=document.getElementById('navLinks');
+const menuBtn=document.getElementById('menuBtn');
+const toast=document.getElementById('toast');
+window.addEventListener('scroll',()=>navbar.classList.toggle('scrolled',window.scrollY>30),{passive:true});
+menuBtn.addEventListener('click',()=>{const open=navLinks.classList.toggle('open');menuBtn.setAttribute('aria-expanded',String(open));menuBtn.textContent=open?'×':'☰'});
+navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{navLinks.classList.remove('open');menuBtn.setAttribute('aria-expanded','false');menuBtn.textContent='☰'}));
+const revealObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');revealObserver.unobserve(entry.target)}}),{threshold:.13});
+document.querySelectorAll('.reveal').forEach(el=>revealObserver.observe(el));
+document.querySelectorAll('.explore-btn').forEach(btn=>btn.addEventListener('click',()=>{toast.textContent=btn.dataset.model+' — concept model. Full product details coming soon.';toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),3200)}));
+const glow=document.getElementById('glow');
+const heroVisual=document.getElementById('heroVisual');
+const bikeWrap=document.getElementById('bikeWrap');
+if(window.matchMedia('(pointer:fine)').matches){
+ document.addEventListener('pointermove',e=>{glow.style.left=e.clientX+'px';glow.style.top=e.clientY+'px'});
+ heroVisual.addEventListener('pointermove',e=>{const r=heroVisual.getBoundingClientRect();const x=(e.clientX-r.left)/r.width-.5;const y=(e.clientY-r.top)/r.height-.5;bikeWrap.style.animation='none';bikeWrap.style.transform=`rotateY(${x*8}deg) rotateX(${-y*5}deg) translateY(-4px)`});
+ heroVisual.addEventListener('pointerleave',()=>{bikeWrap.style.animation='bikeFloat 6s ease-in-out infinite';bikeWrap.style.transform=''});
+}
+
+// Light / dark theme toggle. The selected theme stays active for this page session.
+const themeToggle=document.getElementById('themeToggle');
+themeToggle.addEventListener('click',()=>{
+ const light=document.body.classList.toggle('light-mode');
+ themeToggle.innerHTML=light?'☾ <span>DARK MODE</span>':'☼ <span>LIGHT MODE</span>';
+ themeToggle.setAttribute('aria-label',light?'Switch to dark mode':'Switch to light mode');
+});
+// Slider controls and touch swipe.
+const slides=[...document.querySelectorAll('.slide')];
+const dots=[...document.querySelectorAll('#sliderDots button')];
+const slideCurrent=document.getElementById('slideCurrent');
+let slideIndex=0, slideTimer;
+function showSlide(index){
+ slideIndex=(index+slides.length)%slides.length;
+ slides.forEach((slide,i)=>slide.classList.toggle('active',i===slideIndex));
+ dots.forEach((dot,i)=>dot.classList.toggle('active',i===slideIndex));
+ slideCurrent.textContent=String(slideIndex+1).padStart(2,'0');
+}
+document.getElementById('slidePrev').addEventListener('click',()=>{showSlide(slideIndex-1);restartSlider()});
+document.getElementById('slideNext').addEventListener('click',()=>{showSlide(slideIndex+1);restartSlider()});
+dots.forEach((dot,i)=>dot.addEventListener('click',()=>{showSlide(i);restartSlider()}));
+function restartSlider(){clearInterval(slideTimer);slideTimer=setInterval(()=>showSlide(slideIndex+1),6000)}
+restartSlider();
+const slider=document.getElementById('bikeSlider');let touchStartX=0;
+slider.addEventListener('touchstart',e=>{touchStartX=e.changedTouches[0].screenX},{passive:true});
+slider.addEventListener('touchend',e=>{const dx=e.changedTouches[0].screenX-touchStartX;if(Math.abs(dx)>45){showSlide(slideIndex+(dx<0?1:-1));restartSlider()}},{passive:true});
+// Frontend-only contact form demo: validate and show inline feedback; no message is sent.
+const contactForm=document.getElementById('contactForm');
+contactForm.addEventListener('submit',e=>{
+ e.preventDefault();
+ if(!contactForm.reportValidity()) return;
+ const name=contactForm.elements.name.value.trim();
+ document.getElementById('formFeedback').textContent=`Thanks, ${name}! Your message is ready — connect a backend to send it for real.`;
+ contactForm.reset();
+});
+
+</script>
+</body>
+</html>
